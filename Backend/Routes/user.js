@@ -13,6 +13,10 @@ const userStructure = zod.object({
     lastname : zod.string(),
 })
 
+const signinStructure = zod.object({
+    username : zod.string().email(),
+    password : zod.string()
+})
 userRouter.post("/signup" , async (req, res)=>{
     const { success } = userStructure.safeParse(req.body);
     if(!success)
@@ -40,17 +44,46 @@ userRouter.post("/signup" , async (req, res)=>{
     })
 
     //now every database value given a special id 
-    const userid = user._id;
+    const userId = user._id;
 
     const token = jwt.sign({
-        userid
+        userId
     }, JWT_SECRET);
 
     res.json({
         msg : "user created successfully",
-        Token : token
+        
     })
 
+})
+
+userRouter.post("/signin" , async (req,res)=>{
+    const { success } = signinStructure.safeParse(req.body);
+    if(!success)
+    {
+        res.status(403).json({
+            msg : "invalid user entry"
+        })
+    }
+
+    const user =  await User.findOne({
+        username : req.body.username,
+        password : req.body.password
+    })
+
+    if (user) {
+        const token = jwt.sign({
+            userId: user._id
+        }, JWT_SECRET);
+  
+        res.json({
+            Token: token
+        })
+        return;
+    }
+    res.status(411).json({
+        msg : "error while loging "
+    })
 })
 
 module.exports =  userRouter
