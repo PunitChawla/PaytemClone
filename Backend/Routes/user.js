@@ -1,23 +1,13 @@
 const express = require("express");
 const zod =require("zod")
 const userRouter = express.Router();
-// const userStructure = require("../types");
+const {userStructure ,signinStructure } = require("../types");
 const { User } = require("../database");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = require("../config");
 const { authmiddleware } = require("../middleware/middleware");
 
-const userStructure = zod.object({
-    username : zod.string().email(),
-    password : zod.string(),
-    firstname : zod.string(),
-    lastname : zod.string(),
-})
 
-const signinStructure = zod.object({
-    username : zod.string().email(),
-    password : zod.string()
-})
 userRouter.post("/signup" , async (req, res)=>{
     const { success } = userStructure.safeParse(req.body);
     if(!success)
@@ -108,6 +98,30 @@ userRouter.put("/update", authmiddleware , async (req, res)=>{
         msg : "update successfully "
     })
 
+})
+userRouter.get("/bluk" , async (req , res)=>{
+    const filter = req.query.flter || ""
+
+    const users = User.findOne({
+
+        $or : [{
+            firstname :{
+                "$regex" : filter
+            },
+            lastname :{
+                "$regex" : filter
+            }
+        }]
+    })
+
+    res.json({
+        user: users.map(user => ({
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            _id: user._id
+        }))
+    })
 })
 
 module.exports =  userRouter
