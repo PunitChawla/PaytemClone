@@ -4,9 +4,9 @@ const userRouter = express.Router();
 const {userStructure ,signinStructure } = require("../types");
 const { User } = require("../database");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = require("../config");
+const { JWT_SECRET } = require("../config");
 const { authmiddleware } = require("../middleware/middleware");
-
+console.log(JWT_SECRET);
 
 userRouter.post("/signup" , async (req, res)=>{
     const { success } = userStructure.safeParse(req.body);
@@ -83,7 +83,7 @@ const updatebody = zod.object({
     lastname : zod.string()
 
 })
-userRouter.put("/update", authmiddleware , async (req, res)=>{
+userRouter.put("/update",  async (req, res)=>{
 
     const { success } =  updatebody.safeParse(req.body);
     if(!success)
@@ -102,7 +102,7 @@ userRouter.put("/update", authmiddleware , async (req, res)=>{
 userRouter.get("/bluk" , async (req , res)=>{
     const filter = req.query.flter || ""
 
-    const users = User.findOne({
+    const users =  await User.find({
 
         $or : [{
             firstname :{

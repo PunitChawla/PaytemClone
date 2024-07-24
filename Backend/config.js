@@ -1,3 +1,3 @@
-const JWT_SECRET = "punit@1234"
-
-module.exports = JWT_SECRET;
+module.exports = {
+	JWT_SECRET: "punit@1234"
+}
