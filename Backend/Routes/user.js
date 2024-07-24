@@ -5,6 +5,7 @@ const userRouter = express.Router();
 const { User } = require("../database");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = require("../config");
+const { authmiddleware } = require("../middleware/middleware");
 
 const userStructure = zod.object({
     username : zod.string().email(),
@@ -52,7 +53,7 @@ userRouter.post("/signup" , async (req, res)=>{
 
     res.json({
         msg : "user created successfully",
-        
+        Token : token
     })
 
 })
@@ -84,6 +85,29 @@ userRouter.post("/signin" , async (req,res)=>{
     res.status(411).json({
         msg : "error while loging "
     })
+})
+
+const updatebody = zod.object({
+    firstname :  zod.string(),
+    password : zod.string(),
+    lastname : zod.string()
+
+})
+userRouter.put("/update", authmiddleware , async (req, res)=>{
+
+    const { success } =  updatebody.safeParse(req.body);
+    if(!success)
+    {
+        res.status(403).json({
+            msg  : "invalid input "
+        })
+    }
+    await User.updateOne({ _id: req.userId} , req.body);
+
+    res.json({
+        msg : "update successfully "
+    })
+
 })
 
 module.exports =  userRouter
