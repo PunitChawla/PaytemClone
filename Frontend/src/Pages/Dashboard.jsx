@@ -1,7 +1,11 @@
+import { Appbar } from "../Components/Appbar"
+import { Balance } from "../Components/Balance"
+
 export const Dashboard = () =>{
     return<>
     <div>
-        hy there from Dashboard
+     <Appbar/>
+     <Balance value={"10000"} />
     </div>
     </>
 }
