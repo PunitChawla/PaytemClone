@@ -22,7 +22,7 @@ userRouter.post("/signup" , async (req, res)=>{
 
     if(exitsUser)
     {
-        res.status(401).json({
+       return  res.status(401).json({
             msg : "user already exits"
         })
     }
@@ -83,7 +83,7 @@ const updatebody = zod.object({
     lastname : zod.string()
 
 })
-userRouter.put("/update",  async (req, res)=>{
+userRouter.put("/update",   authmiddleware , async (req, res)=>{
 
     const { success } =  updatebody.safeParse(req.body);
     if(!success)

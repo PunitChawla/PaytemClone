@@ -6,10 +6,10 @@ const authmiddleware  = (req, res , next) =>{
         return res.status(411).json({msg : "token to shi de "});
     }
         const token = authheader.split(' ')[1]
-        console.log(token);
+       
         try {
             const decode = jwt.verify(token, JWT_SECRET)
-            console.log(decode);
+           
             if(decode.userId)
             {
                 req.userId = decode.userId;
