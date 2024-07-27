@@ -20,10 +20,9 @@ userRouter.post("/signup" , async (req, res)=>{
         username: req.body.username
     })
 
-    if(exitsUser)
-    {
-       return  res.status(401).json({
-            msg : "user already exits"
+    if (exitsUser) {
+        return res.status(411).json({
+            message: "Email already taken/Incorrect inputs"
         })
     }
 
