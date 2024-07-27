@@ -1,29 +1,26 @@
-const {JWT_SECRET } = require("../config")
-const jwt = require("jsonwebtoken")
-const authmiddleware  = (req, res , next) =>{
-    const authheader = req.headers.authorization;
-    if(!authheader ){
-        return res.status(411).json({msg : "token to shi de "});
+const { JWT_SECRET } = require("../config");
+const jwt = require("jsonwebtoken");
+
+const authMiddleware = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(403).json({});
     }
-        const token = authheader.split(' ')[1]
-       
-        try {
-            const decode = jwt.verify(token, JWT_SECRET)
-           
-            if(decode.userId)
-            {
-                req.userId = decode.userId;
-                next();
-            }
-            else{
-                return res.status(411).json({ msg  : "auth fail "});
-            }
-        } catch (error) {
-            console.log(error);
-            return res.status(411).json({ msg  : "auth fail without try"});
-        }
-}
+
+    const token = authHeader.split(' ')[1];
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+
+        req.userId = decoded.userId;
+
+        next();
+    } catch (err) {
+        return res.status(403).json({});
+    }
+};
 
 module.exports = {
-    authmiddleware
+    authMiddleware
 }

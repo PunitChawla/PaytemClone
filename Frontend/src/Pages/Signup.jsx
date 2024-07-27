@@ -37,15 +37,21 @@ export const Signup = () =>{
           setPassword(e.target.value)
         }} placeholder="123456" label={"Password"} />
         <div className="pt-4">
-          <Button doClick={async () => {
-            console.log("ha bhai ");
-            const response = await axios.post("http://localhost:3000/api/v1/user/signup",{
-              username,
-              password,
-              lastname,
-              firstname 
-            })}
-            } label={"Sign up"} />
+        <Button 
+        doClick={async () => {
+            try {
+                const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
+                    username,
+                    password,
+                    lastname,
+                    firstname
+                  });
+                  localStorage.setItem("token", response.data.token);
+            } catch (error) {
+                console.error("There was an error signing up!", error);
+            }
+        }} 
+        label={"Sign up"}  />
         </div>
         <BottomWrapping label={"Already have an account?"} buttonText={"Sign in"} to={"/signin"} />
       </div>

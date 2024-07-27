@@ -5,6 +5,7 @@ import { InputName } from "../Components/InputName"
 import { Subheading } from "../Components/Subheading"
 
 export const Signin = () =>{
+    
     return<div className="bg-slate-300 flex justify-center h-screen">
         <div className="flex flex-col justify-center">
             <div className="rounded-lg bg-white w-80 text-center h-max px-4">
