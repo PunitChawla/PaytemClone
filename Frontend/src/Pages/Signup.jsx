@@ -5,10 +5,11 @@ import { Heading } from "../Components/Heading"
 import { InputName } from "../Components/InputName"
 import { Subheading } from "../Components/Subheading"
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom"
 export const Signup = () =>{
-    const [firstname, setFirstName] = useState("");
-    const [lastname, setLastName] = useState("");
+  const navigate = useNavigate();
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");   
     const [password, setPassword] = useState("");
  
@@ -39,17 +40,15 @@ export const Signup = () =>{
         <div className="pt-4">
         <Button 
         doClick={async () => {
-            try {
-                const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
-                    username,
-                    password,
-                    lastname,
-                    firstname
-                  });
-                  localStorage.setItem("token", response.data.token);
-            } catch (error) {
-                console.error("There was an error signing up!", error);
-            }
+            
+           const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
+               username,
+               password,
+               lastName,
+               firstName
+             });
+             localStorage.setItem("token", response.data.token)
+             navigate("/dashboard")
         }} 
         label={"Sign up"}  />
         </div>

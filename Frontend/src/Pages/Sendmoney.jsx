@@ -1,5 +1,12 @@
+import axios from "axios";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export const Sendmoney = () => {
+  let [searchParams] = useSearchParams();
+  const[amount , setAmount] = useState(0);
+  const id = searchParams.get("id");
+  const name = searchParams.get("name");
   return (
     <div className="bg-gray-100 flex justify-center flex h-screen ">
       <div className="h-full flex flex-col  justify-center ">
@@ -11,9 +18,9 @@ export const Sendmoney = () => {
           <div className="p-3">
             <div className="flex items-center space-x-4">
               <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
-                <div className="text-2xl text-white">A</div>
+                <div className="text-2xl text-white">{name[0].toUpperCase()}</div>
               </div>
-              <h3 class="text-2xl font-semibold">Friend's Name</h3>
+              <h3 class="text-2xl font-semibold">{name.toUpperCase()}</h3>
             </div>
           </div>
 
@@ -25,13 +32,27 @@ export const Sendmoney = () => {
               >
                 Amount (in Rs)
               </label>
-              <input
+              <input onChange={(e)=>{
+                setAmount(e.target.value);
+              }}
                 type="number"
                 class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                 id="amount"
                 placeholder="Enter amount"
               />
-            <button class="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white">
+            <button onClick={async()=>{
+              await axios.post("http://localhost:3000/api/v1/account/transfer",
+                {
+                  to: id,
+                  amount
+                },{
+                  headers:{
+                    Authorization : "Bearer "+localStorage.getItem("token")
+                  }
+                }
+              )
+
+            }} class="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white">
               Initiate Transfer
             </button>
             </div>
