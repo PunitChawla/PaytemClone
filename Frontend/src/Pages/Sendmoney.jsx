@@ -24,7 +24,7 @@ export const Sendmoney = () => {
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 p-3">
             <div className="space-y-2">
               <label
                 class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -41,7 +41,7 @@ export const Sendmoney = () => {
                 placeholder="Enter amount"
               />
             <button onClick={async()=>{
-              await axios.post("http://localhost:3000/api/v1/account/transfer",
+             const responce =  await axios.post("http://localhost:3000/api/v1/account/transfer",
                 {
                   to: id,
                   amount
@@ -51,6 +51,7 @@ export const Sendmoney = () => {
                   }
                 }
               )
+              alert(responce.data.message);
 
             }} class="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white">
               Initiate Transfer
