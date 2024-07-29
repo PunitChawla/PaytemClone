@@ -95,3 +95,7 @@ Contributions are welcome! Please fork the repository and create a pull request 
 - **Author:** [Punit Chawla](https://github.com/PunitChawla)
 - **Project Link:** [https://github.com/PunitChawla/PaytmClone](https://github.com/PunitChawla/PaytmClone.git )
 
+![Signup page ](./images/Screenshot%202024-07-29%20113850.png)
+![signin page](./images/Screenshot%202024-07-29%20114001.png)
+![Dashboard](./images/Screenshot%202024-07-29%20114046.png)
+![send money page ](./images/Screenshot%202024-07-29%20114105.png)
