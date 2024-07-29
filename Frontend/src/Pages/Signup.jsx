@@ -15,7 +15,7 @@ export const Signup = () =>{
  
 
     return <div className="bg-slate-300 h-screen flex justify-center">
-      
+       
     <div className="flex flex-col justify-center">
       <div className="rounded-lg bg-white w-80 text-center p-2 h-max px-4">
         <Heading label={"Sign up"} />
@@ -36,7 +36,7 @@ export const Signup = () =>{
 
         <InputName doChange={(e) => {
           setPassword(e.target.value)
-        }} placeholder="123456" label={"Password"} />
+        }} placeholder="minimum 6 digit password is required " label={"Password"} />
         <div className="pt-4">
         <Button 
         doClick={async () => {
@@ -52,7 +52,8 @@ export const Signup = () =>{
         }} 
         label={"Sign up"}  />
         </div>
-        <BottomWrapping label={"Already have an account?"} buttonText={"Sign in"} to={"/signin"} />
+        <BottomWrapping lable={"Already have an account?"} buttontext={"Sign in"} to={"/signin"} />
+        
       </div>
     </div>
   </div>
