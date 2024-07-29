@@ -9,10 +9,10 @@ This project is a basic clone of the Paytm app built using React. It includes fu
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Folder Structure](#folder-structure)
+
 - [Technologies Used](#technologies-used)
 - [Contributing](#contributing)
-- [License](#license)
+
 - [Contact](#contact)
 
 ## Features
@@ -35,16 +35,22 @@ Follow these instructions to set up the project locally.
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/PunitChawla/PaytmClone.git
+    git clone https://github.com/PunitChawla/PaytmClone.git 
     cd PaytmClone
     ```
 
 2. Install the dependencies:
-    ```bash
-    npm install
-    # or
-    yarn install
     ```
+    cd backend
+    npm i
+    node index.js
+    ```
+    ```
+    cd frontend
+    npm i
+    npm run dev
+    ```
+
 
 ### Usage
 
@@ -55,7 +61,37 @@ Follow these instructions to set up the project locally.
     yarn start
     ```
 
-2. Open your browser and navigate to `http://localhost:3000`.
+2. Open your browser and navigate to `http://localhost:5173`.
 
-## Folder Structure
+
+## Technologies Used
+
+- **Frontend:**
+  - React
+  - React Router
+  - Tailwind CSS
+- **Backend:**
+  - MongoDB for database
+  - JWT Token  for Authentication
+  - ZOD for input validation
+  - middleware , routes 
+
+- **Others:**
+  - Axios for API calls
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and create a pull request with your changes.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a pull request
+
+
+## Contact
+
+- **Author:** [Punit Chawla](https://github.com/PunitChawla)
+- **Project Link:** [https://github.com/PunitChawla/PaytmClone](https://github.com/PunitChawla/PaytmClone.git )
 
